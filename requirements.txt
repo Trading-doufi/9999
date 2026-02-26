@@ -1,0 +1,26 @@
+cat > ~/trading-bot-pro/requirements.txt << 'EOF'
+# Kafka
+kafka-python==2.0.2
+
+# Redis
+redis==5.0.1
+
+# MongoDB
+pymongo==4.6.1
+
+# WebSocket
+websocket-client==1.7.0
+
+# Data Analysis
+ccxt==4.3.37
+pandas==2.2.2
+numpy==1.26.4
+
+# Telegram
+python-telegram-bot==20.7
+requests==2.31.0
+
+# Utilities
+python-dotenv==1.0.1
+schedule==1.2.2
+EOF
