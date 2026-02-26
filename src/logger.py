@@ -1,4 +1,3 @@
-cat > ~/trading-bot-pro/src/logger.py << 'EOF'
 # src/logger.py
 import logging
 import logging.handlers
@@ -121,3 +120,4 @@ logger = TradingLogger()
 def get_logger():
     return logger
 EOF
+
