@@ -132,5 +132,6 @@ class SignalDatabase:
     
     def close(self):
         self.client.close()
-EOF
+
+
 
