@@ -100,5 +100,6 @@ class BybitWebSocketIngestor:
                 return float(data['p'])
         except: pass
         return None
-EOF
+
+
 
