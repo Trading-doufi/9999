@@ -1,5 +1,3 @@
-mkdir -p ~/trading-bot-pro/scripts
-cat > ~/trading-bot-pro/scripts/create_topics.sh << 'EOF'
 #!/bin/bash
 
 GREEN='\033[0;32m'
@@ -37,3 +35,4 @@ done
 echo -e "\n${GREEN}📋 Existing topics:${NC}"
 $KAFKA_HOME/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
 EOF
+
