@@ -1,5 +1,3 @@
-cat > ~/trading-bot-pro/src/run.py << 'EOF'
-# src/run.py
 import threading
 import time
 import logging
@@ -106,3 +104,4 @@ def main():
 if __name__ == "__main__":
     main()
 EOF
+
