@@ -109,5 +109,4 @@ class ProfessionalTelegramBot:
             while True: time.sleep(1)
         except KeyboardInterrupt:
             trading_logger.main_logger.info("🛑 Stopping bot...")
-EOF
 
