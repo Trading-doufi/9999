@@ -34,5 +34,6 @@ done
 
 echo -e "\n${GREEN}📋 Existing topics:${NC}"
 $KAFKA_HOME/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
-EOF
+
+
 
