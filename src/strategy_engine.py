@@ -1,5 +1,3 @@
-cat > ~/trading-bot-pro/src/strategy_engine.py << 'EOF'
-# src/strategy_engine.py
 from kafka import KafkaConsumer
 import json
 import threading
@@ -282,3 +280,4 @@ class StrategyEngine:
         thread = threading.Thread(target=self.analyze_signals, daemon=True)
         thread.start()
 EOF
+
