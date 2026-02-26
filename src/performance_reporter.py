@@ -129,5 +129,5 @@ class PerformanceReporter:
         while True:
             schedule.run_pending()
             time.sleep(60)
-EOF
+
 
