@@ -119,5 +119,6 @@ logger = TradingLogger()
 
 def get_logger():
     return logger
-EOF
+
+
 
