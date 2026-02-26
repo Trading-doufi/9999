@@ -1,4 +1,3 @@
-cat > ~/trading-bot-pro/src/bybit_ingestor.py << 'EOF'
 # src/bybit_ingestor.py
 import json
 import threading
@@ -102,3 +101,4 @@ class BybitWebSocketIngestor:
         except: pass
         return None
 EOF
+
