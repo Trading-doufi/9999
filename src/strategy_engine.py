@@ -279,5 +279,5 @@ class StrategyEngine:
     def start_analysis_thread(self):
         thread = threading.Thread(target=self.analyze_signals, daemon=True)
         thread.start()
-EOF
+
 
