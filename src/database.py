@@ -1,5 +1,3 @@
-cat > ~/trading-bot-pro/src/database.py << 'EOF'
-# src/database.py
 from pymongo import MongoClient
 from datetime import datetime, timedelta
 import logging
@@ -135,3 +133,4 @@ class SignalDatabase:
     def close(self):
         self.client.close()
 EOF
+
