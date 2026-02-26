@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+venv/
+env/
+.env
+.venv
+
+# Logs
+logs/
+*.log
+trading_bot.log
+
+# Data
+data/
+*.db
+*.sqlite3
+
+# Kafka data
+/kafka/data/
+/zookeeper/data/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config
+config/local_settings.py
+*.key
+*.pem
