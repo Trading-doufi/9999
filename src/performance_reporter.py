@@ -1,5 +1,3 @@
-cat > ~/trading-bot-pro/src/performance_reporter.py << 'EOF'
-# src/performance_reporter.py
 import time
 import schedule
 import logging
@@ -132,3 +130,4 @@ class PerformanceReporter:
             schedule.run_pending()
             time.sleep(60)
 EOF
+
