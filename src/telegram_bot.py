@@ -1,5 +1,3 @@
-cat > ~/trading-bot-pro/src/telegram_bot.py << 'EOF'
-# src/telegram_bot.py
 import redis
 import json
 import time
@@ -112,3 +110,4 @@ class ProfessionalTelegramBot:
         except KeyboardInterrupt:
             trading_logger.main_logger.info("🛑 Stopping bot...")
 EOF
+
