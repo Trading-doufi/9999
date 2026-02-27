@@ -1,3 +1,4 @@
+# src/telegram_bot.py
 import redis
 import json
 import time
@@ -18,7 +19,7 @@ class ProfessionalTelegramBot:
         self.chat_id = TELEGRAM_CHAT_ID
         self.redis = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
         self.base_url = f"https://api.telegram.org/bot{self.token}"
-        
+
     def send_message(self, text):
         try:
             url = f"{self.base_url}/sendMessage"
@@ -30,7 +31,7 @@ class ProfessionalTelegramBot:
                 trading_logger.log_error('telegram_bot.send_message', response.text)
         except Exception as e:
             trading_logger.log_error('telegram_bot.send_message', e)
-    
+
     def format_signal(self, signal):
         symbol = signal['symbol']
         score = signal['score']
@@ -47,40 +48,54 @@ class ProfessionalTelegramBot:
         liquidation = signal.get('liquidation_detected', False)
         reason = signal.get('reason', 'Technical setup')
         rsi = signal.get('rsi', 50)
-        
+
+        # تحديد الدقة حسب السعر
+        if entry < 0.0001:
+            price_precision = 6
+        elif entry < 0.001:
+            price_precision = 5
+        elif entry < 0.01:
+            price_precision = 4
+        elif entry < 0.1:
+            price_precision = 4
+        elif entry < 1:
+            price_precision = 4
+        else:
+            price_precision = 2
+
         if score >= 85:
             emoji = "🚀🔥"
         elif score >= 75:
             emoji = "📈"
         else:
             emoji = "⚡"
-        
+
         signal_text = f"""
 {emoji} *إشارة تداول احترافية* {emoji}
 
 📊 *{symbol}*
 
 {direction}
-💰 *الدخول:* `{entry}`
-🛑 *وقف الخسارة:* `{stop_loss}`
+💰 *الدخول:* `{entry:.{price_precision}f}`
+🛑 *وقف الخسارة:* `{stop_loss:.{price_precision}f}`
 
 🎯 *أهداف الربح:*
-├ TP1: `{tp1}` (+{profit_tp1}%)
-├ TP2: `{tp2}` (+{profit_tp2}%)
-└ TP3: `{tp3}` (+{profit_tp3}%)
+├ TP1: `{tp1:.{price_precision}f}` (+{profit_tp1:.1f}%)
+├ TP2: `{tp2:.{price_precision}f}` (+{profit_tp2:.1f}%)
+└ TP3: `{tp3:.{price_precision}f}` (+{profit_tp3:.1f}%)
 
 ⚡ *الرافعة المقترحة:* `x{leverage}`
-⭐ *الثقة:* `{score}%`
+⭐ *الثقة:* `{score:.1f}%`
 
 📋 *التحليل:*
 • {reason}
-• RSI: `{rsi}`
+• RSI: `{rsi:.1f}`
 • التصفيات: {'✅' if liquidation else '❌'}
 
 #{symbol} #Signal
 """
         return signal_text
-    
+
     def check_signals(self):
         last_signals = {}
         while True:
@@ -100,7 +115,7 @@ class ProfessionalTelegramBot:
             except Exception as e:
                 trading_logger.log_error('telegram_bot.check_signals', e)
             time.sleep(5)
-    
+
     def start(self):
         trading_logger.main_logger.info("🚀 Professional Telegram Bot started")
         self.send_message("🤖 *بوت التداول الاحترافي*\n✅ متصل بـ Redis و Kafka\n⏱️ في انتظار إشارات قوية...")
@@ -109,4 +124,3 @@ class ProfessionalTelegramBot:
             while True: time.sleep(1)
         except KeyboardInterrupt:
             trading_logger.main_logger.info("🛑 Stopping bot...")
-
