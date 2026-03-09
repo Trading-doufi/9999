@@ -10,8 +10,6 @@ BYBIT_API_KEY    = "hkosl5qIgSou4H8AfF"
 BYBIT_API_SECRET = "M3miXpAHGdZ9i1eO3B7EU5N4F2WGmNOBlnkz"
 BYBIT_WS_URL     = "wss://stream.bybit.com/v5/public/linear"
 
-# ========== KAFKA ==========
-KAFKA_BOOTSTRAP_SERVERS = "localhost:9092"
 
 # ========== REDIS ==========
 REDIS_HOST = "localhost"
