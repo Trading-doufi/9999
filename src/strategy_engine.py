@@ -1,5 +1,4 @@
 # src/strategy_engine.py
-from kafka import KafkaConsumer
 import json
 import threading
 import time
@@ -8,7 +7,7 @@ import numpy as np
 from datetime import datetime
 import logging
 
-from config.settings import KAFKA_BOOTSTRAP_SERVERS, REDIS_HOST, REDIS_PORT, SYMBOLS, MIN_SCORE
+from config.settings import REDIS_HOST, REDIS_PORT, SYMBOLS, MIN_SCORE
 from src.database import SignalDatabase
 from src.logger import get_logger
 
@@ -19,13 +18,6 @@ trading_logger = get_logger()
 
 class StrategyEngine:
     def __init__(self):
-        self.consumer = KafkaConsumer(
-            'depth', 'trades', 'liquidations',
-            bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
-            auto_offset_reset='latest',
-            enable_auto_commit=True,
-            value_deserializer=lambda x: json.loads(x.decode('utf-8'))
-        )
         self.redis = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
         self.db = SignalDatabase()
         self.price_history = {}
@@ -51,16 +43,23 @@ class StrategyEngine:
     #  DATA INGESTION
     # ─────────────────────────────────────────────
 
-    def start(self):
-        trading_logger.main_logger.info("🚀 Strategy Engine started")
-        for msg in self.consumer:
-            try:
-                if msg.topic == 'trades':
-                    self.process_trade(msg.value)
-                elif msg.topic == 'liquidations':
-                    self.process_liquidation(msg.value)
-            except Exception as e:
-                trading_logger.log_error('strategy_engine.start', e)
+    def process_depth(self, data):
+        """يستقبل orderbook data مباشرة من WebSocket بدون Kafka"""
+        try:
+            pass  # orderbook محفوظ في Redis من bybit_ingestor
+        except Exception as e:
+            trading_logger.log_error('strategy_engine.process_depth', e)
+
+
+
+
+
+
+
+
+
+
+
 
     def process_trade(self, data):
         try:
